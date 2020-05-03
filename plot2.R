@@ -1,9 +1,9 @@
 ##  Load initialize.R
 source("initialize.R")
 ##  Create a data frame of the  Emmisions in Baltimore City, Maryland
-baltimoreEmmisions <- NEI[NEI$fips == "24510",]
+if (!exists("baltimoreEmmisions")) baltimoreEmmisions <- NEI[NEI$fips == "24510",]
 ##  Create a list of total Emmisions in a year
-yearlyEmmisionsBaltimore <- tapply(baltimoreEmmisions$Emissions, baltimoreEmmisions$year, sum)
+if (!exists("yearlyEmmisionsBaltimore")) yearlyEmmisionsBaltimore <- tapply(baltimoreEmmisions$Emissions, baltimoreEmmisions$year, sum)
 ##  Start the graphic device
 png("plot2.png")
 ##  Plot the graph

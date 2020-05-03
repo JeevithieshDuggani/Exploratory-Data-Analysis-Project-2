@@ -1,7 +1,7 @@
 ##  Load initialize.R
 source("initialize.R")
 ##  Create a list of the total Emmisions in each year
-yearlyEmmisions <- tapply(NEI$Emissions, as.factor(NEI$year), sum, simplify = FALSE)
+if (!exists("yearlyEmmisions")) yearlyEmmisions <- tapply(NEI$Emissions, as.factor(NEI$year), sum, simplify = FALSE)
 ##  Start the graphic device
 png("plot1.png")
 ##  Plot the graph
