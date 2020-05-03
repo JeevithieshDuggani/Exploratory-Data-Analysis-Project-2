@@ -13,3 +13,5 @@ plot(main = "Yearly Emmisions of PM2.5",
 ##  close the graphic device
 dev.off()
 ##  end
+
+##  The Emmisions drop heavily from 1999 to 2002. From 2002 to 2005 there is a slight decrease and then it drops quite heavily in 2008.
