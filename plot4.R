@@ -1,6 +1,6 @@
 ##  Load initialize.R
 source("initialize.R")
-##  Identify the indices of the coal combustion related sources
+##  Identify the SCC of the coal combustion related sources
 if (!exists("coalSources")) coalSources <- grep("coal", SCC$Short.Name, ignore.case = TRUE)
 if (!exists("coalSourcesSCC")) coalSourcesSCC <- SCC[coalSources,]$SCC
 ##  List of all the coal based Emissions
