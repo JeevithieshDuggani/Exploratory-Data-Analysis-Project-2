@@ -1,13 +1,19 @@
 ##  Load initialize.R
 source("initialize.R")
+##  Identify the SCC of the combustion related sources
+if (!exists("combSources")) combSources <- grep("comb", SCC$SCC.Level.One, ignore.case = TRUE)
+if (!exists("combSourcesSCC")) combSourcesSCC <- SCC[combSources,]
 ##  Identify the SCC of the coal combustion related sources
-if (!exists("coalSources")) coalSources <- grep("coal", SCC$Short.Name, ignore.case = TRUE)
-if (!exists("coalSourcesSCC")) coalSourcesSCC <- SCC[coalSources,]$SCC
+if (!exists("coalCombSources")) coalCombSources <- grep("coal", 
+                                                        combSourcesSCC$SCC.Level.Four, 
+                                                        ignore.case = TRUE
+                                                   )
+if (!exists("coalCombSourcesSCC")) coalCombSourcesSCC <- as.character(combSourcesSCC[coalCombSources,]$SCC)
 ##  List of all the coal based Emissions
-if (!exists("coalEmissions")) coalEmissions <- NEI[NEI$SCC %in% coalSourcesSCC,]
+if (!exists("coalCombEmissions")) coalCombEmissions <- NEI[NEI$SCC %in% coalCombSourcesSCC,]
 ##  Create a list of the total Emissions in each year
-if (!exists("yearlyEmissionsCoal")) yearlyEmissionsCoal <- tapply(coalEmissions$Emissions, 
-                                                                  as.factor(coalEmissions$year), 
+if (!exists("yearlyEmissionsCoal")) yearlyEmissionsCoal <- tapply(coalCombEmissions$Emissions, 
+                                                                  as.factor(coalCombEmissions$year), 
                                                                   sum, simplify = FALSE
                                                            )
 ##  Start the graphic device
