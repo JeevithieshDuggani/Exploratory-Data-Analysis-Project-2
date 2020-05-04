@@ -12,8 +12,8 @@ if (!exists("yearlyEmissionsbyType")) yearlyEmissionsbyType <- aggregate(Emissio
 ##  Start the graphical device
 png("plot3.png")
 ##  Plot the graph
-graph <- ggplot(yearlyEmissionsbyType, aes(year, Emissions, color = type))
-graph <- graph + geom_line() + 
+graph <- ggplot(yearlyEmissionsbyType, aes(x = as.character(year), y = Emissions))
+graph <- graph + geom_bar(stat = "identity") + facet_grid(.~type) +
          xlab("Year") + ylab("Yearly Emission in Baltimore City, Maryland") + 
          ggtitle("Yearly Emissions of PM2.5 in Baltimore City, Maryland based on type")
 print(graph)
